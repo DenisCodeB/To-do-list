@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/main.css" type="text/css">
 
         <title>To-do List</title>
@@ -16,10 +18,12 @@
         <main>
             <section class="welcome-section">
                 <div class="welcome-title">
-                    <p>thought.</p>
-                    <p>wrote.</p>
-                    <p>did it.</p>
-                    
+                    <div class="text-wrapper">
+                        <p>thought.</p>
+                        <p>wrote.</p>
+                        <p>did it.</p>
+                    </div>
+                    <h2>Create perfect to-do list!</h2>
                 </div>
 
                 <div class="welcome-images">
@@ -31,7 +35,37 @@
             </section>
 
             <section class="to-do-section">
+                <div class="task-area">
+                    <div class="header-task-area">
+                        <p class="some-info">Your tasks</p>
+                        <form>
+                            <input type="text" placeholder="New...">
+                            <button class="add-task">&#10011;</button>
+                        </form>
+                    </div>
 
+                    <div class="main-task-area">
+                        <ul>
+                            <li>
+                                <p>Make breakfast</p>
+                                <button class="add-task">&#10005;</button>
+                            </li>
+                            <li>
+                                <p>Do homework</p>
+                                <button class="add-task">&#10005;</button>
+                            </li>
+                            <li>
+                                <p>Clean room</p>
+                                <button class="add-task">&#10005;</button>
+                            </li>
+                            <li>
+                                <p>Play computer games</p>
+                                <button class="add-task">&#10005;</button>
+                            </li>
+                        </ul>
+                        <p class="some-info">all data is saved</p>
+                    </div>
+                </div>
             </section>
         </main>
 

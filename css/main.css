@@ -2,18 +2,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
 :root {
-    --main-linear-gradient: linear-gradient(120deg, hsl(320, 100%, 20%) 0%, hsl(240, 100%, 10%) 50%, hsl(0, 0%, 0%) 100%);
+    --mainBack-linear-gradient: linear-gradient(120deg, hsl(320, 100%, 20%) 0%, hsl(240, 100%, 10%) 50%, hsl(0, 0%, 0%) 100%);
+    --secondBack-linear-gradient: linear-gradient(120deg, hsl(240, 100%, 10%) 0%, hsl(0, 0%, 0%) 100%);
+    --text-color: hsl(0, 0%, 90%);
+    --placeholder-text-color: hsl(0, 0%, 60%);
+    --border-red: 0.063rem solid hsl(0, 100%, 50%);
+    --textBack-linear-gradient: linear-gradient(90deg, hsl(0, 100%, 50%) 0%, hsl(240, 100%, 50%) 50%, hsl(320, 100%, 50%) 100%);
+    --beforeBack-linear-gradient: linear-gradient(120deg, hsl(120, 100%, 50%) 0%, hsl(320, 100%, 50%) 100%);
+    --border-transparent: 0.001rem solid transparent;
+    --task-background: hsla(0, 0%, 100%, 0.15);
+    --background-button: hsla(0, 0%, 100%, 0.04);
 }
+
 *, *::after, *::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier Prime', 'Open Sans', sans-serif;
+    font-family: 'Courier Prime', monospace;
 }
 
 body {
-    background-image: var(--main-linear-gradient);
-    min-height: 100vh;
+    background-image: var(--mainBack-linear-gradient);
 }
 
 
@@ -29,38 +38,181 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 } 
 .typing-text {
     background-color: hsla(0, 0%, 10%, 0.4);
     border-radius: 0.25rem;
 }
 .typing-text h1 {
-    color: hsl(0, 0%, 90%);
+    color: var(--text-color);
     font-weight: normal;
     padding: 0.25rem 1rem;
     text-align: center;
 }
-/*   header finish   */
+/*   header end   */
 
 
 /*   main start   */
 main {
     margin-top: 4rem;
+    border: var(--border-transparent);
 }
 
 /*   section one start   */
-.welcome-section {
+section.welcome-section {
+    /*border: var(--border-red);*/
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
-    justify-items: center;
     align-items: center;
-    padding: 6.25rem 0;
+    gap: 10%;
+    margin: 6.25rem 0;
 }
-.welcome-section .welcome-title {
-    
+div.welcome-title {
+    /*border: var(--border-red);*/
+    justify-self: flex-end;
+    /* margin-right: 20%; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr;
+    gap: 5%;
+}
+.welcome-title .text-wrapper {
+    justify-self: center;
+}
+.welcome-title p{
+    font-size: 4.25rem;
+    color: var(--text-color);
+}
+.welcome-title h2{
+    font-size: 1.75rem;
+    font-weight: normal;
+    margin: auto 0;
+    background: var(--textBack-linear-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+
+div.welcome-images {
+    /*border: var(--border-red);*/
+    justify-self: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20%;
+}
 .welcome-images img{
     width: 12.5rem;
+}
+/*   section one end   */
+
+/*   section two start   */
+section.to-do-section {
+    margin: 12.5rem 0;
+    display: block;
+}
+
+
+
+div.task-area {
+    padding: 1rem;
+    width: 35%;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    position: relative;
+    background: var(--secondBack-linear-gradient);
+}
+div.task-area::before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 0.1rem);
+    height: calc(100% + 0.1rem);
+    top: -0.05rem;
+    left: -0.05rem;
+    border-radius: 0.5rem;
+    background-image: var(--beforeBack-linear-gradient);
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+    z-index: -1;
+    
+    animation-name: floatGradient;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+p.some-info {
+    color: var(--placeholder-text-color);
+    text-align: center;
+    font-size: 1.125rem;
+}
+.header-task-area form {
+    position: relative;
+}
+.header-task-area form input, .main-task-area ul li{
+    width: 100%;
+    background-color: hsla(0, 0%, 100%, 0.1);
+    outline: none;
+    border: none;
+    border-radius: 0.25rem;
+    transition: all 0.3s linear;
+    font-size: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-color);
+    margin: 1rem 0;
+}
+input[type=text]:active, input[type=text]:focus {
+    background-color: var(--task-background);
+}
+button.add-task {
+    background-color: transparent; 
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
+    outline: none;
+    box-shadow: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    padding: 0.25rem 0.5rem;
+    transition: all .2s linear;
+    border-radius: 0.25rem; 
+    cursor: pointer;
+}
+button.add-task:focus, button.add-task:active {
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+button.add-task:hover {
+    background-color: var(--background-button); 
+}
+.main-task-area {
+    margin-top: 2rem;
+}
+.main-task-area ul {
+    list-style: none;
+}
+.main-task-area ul li {
+    position: relative;
+    background-color: var(--task-background);
+    margin: 0.25rem 0;
+}
+.main-task-area p:last-child {
+    margin-top: 1rem; 
+}
+
+@keyframes floatGradient {
+    0% {
+		background-position: 0% 100%;
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+	100% {
+		background-position: 0% 100%;
+	}
 }
