@@ -1,0 +1,175 @@
+@media (max-width: 1440px) {
+    header {
+        height: 3.5rem;
+    }
+    header h1{
+        font-size: 1.75rem;
+    }
+
+    section.welcome-section {
+        margin: 5rem 0;
+        gap: 8%;
+    }
+    .welcome-title p {
+        font-size: 3.5rem;
+    }
+    .welcome-title h2 {
+        font-size: 1.5rem;
+    }
+    div.welcome-images {
+        gap: 10%;
+    }
+    .welcome-images img{
+        width: 11rem;
+    }
+
+    div.task-area {
+        width: 40%;
+    }
+
+    :root {
+        --some-info-font: 0.875rem;
+        --text-task-font-size: 1rem;
+    }
+
+    footer p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    header {
+        height: 3rem;
+    }
+    header h1{
+        font-size: 1.5rem;
+    }
+
+    section.welcome-section {
+        gap: 6%;
+    }
+    .welcome-title p {
+        font-size: 3rem;
+    }
+    .welcome-title h2 {
+        font-size: 1.25rem;
+    }
+    div.welcome-images {
+        gap: 8%;
+    }
+    .welcome-images img{
+        width: 9rem;
+    }
+
+    div.task-area {
+        width: 50%;
+    }
+
+    footer p {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section.welcome-section {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        justify-content: center;
+        align-items: center;
+        gap: 15%;
+    }
+    div.welcome-title {
+        justify-self: center;
+    }
+    .welcome-title p {
+        font-size: 3.5rem;
+    }
+    .welcome-title h2 {
+        font-size: 1.5rem;
+    }
+    div.welcome-images {
+        justify-self: center;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+        justify-content: center;
+        gap: 10%;
+    }
+    .welcome-images img{
+        width: 6rem;
+    }
+
+    div.task-area {
+        width: 65%;
+    }
+}
+
+@media (max-width: 550px) {
+    .welcome-title p {
+        font-size: 3rem;
+    }
+    .welcome-title h2 {
+        font-size: 1.125rem;
+    }
+    div.welcome-images {
+        gap: 5%;
+    }
+    .welcome-images img{
+        width: 5rem;
+    }
+
+    div.task-area {
+        width: 85%;
+    }
+    footer p {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 425px) {
+    header {
+        height: 2.75rem;
+    }
+    header h1{
+        font-size: 1.25rem;
+    }
+
+    .welcome-title p {
+        font-size: 2.75rem;
+    }
+    .welcome-title h2 {
+        font-size: 1rem;
+    }
+    div.welcome-images {
+        justify-self: normal;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        justify-items: center;
+        gap: 15%;
+    }
+    .welcome-images img {
+        width: 5.5rem;
+    }
+    .welcome-images img:first-child{
+        justify-self: end;
+    }
+    .welcome-images img:nth-child(2) {
+        justify-self: start;
+    }
+
+    div.task-area {
+        padding: 0.5rem;
+        width: 90%;
+    }
+
+    :root {
+        --some-info-font: 0.8rem;
+        --text-task-font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 375px) {
+    div.task-area {
+        width: 95%;
+    }
+}
