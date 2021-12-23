@@ -38,31 +38,14 @@
                 <div class="task-area">
                     <div class="header-task-area">
                         <p class="some-info">Your tasks</p>
-                        <form>
-                            <input type="text" placeholder="New...">
-                            <button class="perform-task">&#10011;</button>
+                        <form autocomplete="off" onkeypress="return event.key != 'Enter';">
+                            <input id="input-task-text" type="text" placeholder="New..." value="">
+                            <button type="button" id="add-task-btn" class="perform-task">&#10011;</button>
                         </form>
                     </div>
 
                     <div class="main-task-area">
-                        <ul>
-                            <li>
-                                <p>Make breakfast</p>
-                                <button class="perform-task">&#10005;</button>
-                            </li>
-                            <li>
-                                <p>Do homework</p>
-                                <button class="perform-task">&#10005;</button>
-                            </li>
-                            <li>
-                                <p>Clean room</p>
-                                <button class="perform-task">&#10005;</button>
-                            </li>
-                            <li>
-                                <p>Play computer games</p>
-                                <button class="perform-task">&#10005;</button>
-                            </li>
-                        </ul>
+                        <ul id="parentLi"></ul>
                         <p class="some-info">all data is saved</p>
                     </div>
                 </div>

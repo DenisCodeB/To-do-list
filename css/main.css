@@ -205,8 +205,10 @@ button.perform-task:hover {
 }
 .main-task-area ul {
     list-style: none;
+    transition: all .3s linear;
 }
 .main-task-area ul li {
+    transition: all .3s linear;
     position: relative;
     background-color: var(--task-background);
     margin: 0.25rem 0;
