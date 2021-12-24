@@ -30,7 +30,8 @@ window.addEventListener("load", () => {
             newElemBtn.innerHTML = "&#10005;";
             newElemBtn.setAttribute("class", "perform-task");
             newElemBtn.setAttribute("onclick", 
-                `window.localStorage.removeItem("task${i+1}"); ` + 
+                `window.localStorage.removeItem("task${i+1}"); ` +
+                `countTask--; ` + 
                 "this.parentElement.remove();"
             );
 
@@ -68,7 +69,8 @@ addTask.addEventListener("click", () => {
         newElemBtn.innerHTML = "&#10005;";
         newElemBtn.setAttribute("class", "perform-task");
         newElemBtn.setAttribute("onclick", 
-            `window.localStorage.removeItem("task${countTask}"); ` + 
+            `window.localStorage.removeItem("task${countTask}"); ` +
+            `countTask--; ` + 
             "this.parentElement.remove();"
         );
 

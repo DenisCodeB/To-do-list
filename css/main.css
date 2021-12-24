@@ -27,6 +27,7 @@
 
 body {
     background-image: var(--mainBack-linear-gradient);
+    max-width: 100vw;
     overflow-x: hidden;
 }
 
@@ -82,10 +83,12 @@ section.welcome-section {
     gap: 10%;
     margin: 6.25rem 0;
 }
+
 div.welcome-title {
+    position: relative;
     /*border: var(--border-red);*/
     justify-self: flex-end;
-    /* margin-right: 20%; */
+    transition: all .2s linear;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
@@ -111,6 +114,8 @@ div.welcome-title {
 
 div.welcome-images {
     /*border: var(--border-red);*/
+    transition: all .2s linear;
+    position: relative;
     justify-self: flex-start;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -124,7 +129,8 @@ div.welcome-images {
 
 /*   section two start   */
 section.to-do-section {
-    margin: 12.5rem 0;
+    position: relative;
+    padding: 12.5rem 0;
     display: block;
 }
 div.task-area {
@@ -215,6 +221,32 @@ button.perform-task:hover {
 }
 .main-task-area p:last-child {
     margin-top: 1rem; 
+}
+
+div.back-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: -1;
+}
+.back-images img {
+    position: absolute;
+    width: 17rem;
+    opacity: 0.1;
+    z-index: -1;
+}
+.back-images img:first-child {
+    top: 0;
+    left: 5%;
+}
+.back-images img:last-child {
+    bottom: 0;
+    right: 5%;
 }
 /*   section two end   */
 

@@ -64,6 +64,9 @@
     div.task-area {
         width: 50%;
     }
+    .back-images img {
+        width: 12rem;
+    }
 
     footer p {
         font-size: 0.875rem;
@@ -100,6 +103,9 @@
 
     div.task-area {
         width: 65%;
+    }
+    .back-images img {
+        width: 10rem;
     }
 }
 
@@ -171,5 +177,8 @@
 @media (max-width: 375px) {
     div.task-area {
         width: 95%;
+    }
+    .back-images img {
+        width: 9rem;
     }
 }
