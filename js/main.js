@@ -4,23 +4,28 @@ const addTask = document.getElementById("add-task-btn");
 
 const elemUl = document.getElementById("parentLi");
 
-let countTask = 0;
+// check empty OBJ or not
+let obj = JSON.parse(window.localStorage.getItem("Tasks"));
+if (obj === null) {
+    obj = {
+        task1: "Example"
+    };
+    window.localStorage.setItem("Tasks", JSON.stringify(obj));
+}
 
 // handle window ending load
 window.addEventListener("load", () => {
-    const lengthStorage = window.localStorage.length;
-    countTask = lengthStorage;
-    
+
     // check local storage, empty or not
-    if (lengthStorage) {
-        for (let i = 0; i < lengthStorage; i++) {
+    if (Object.keys(obj).length) {
+        for (let key in obj) {
 
             // get value from local storage
-            const getStorageValue = window.localStorage.getItem(`task${i+1}`);
+            const valueCreatingElem = obj[key];
             
             // create new P element with text node
             const newElemP = document.createElement("p");
-            const textP = document.createTextNode(getStorageValue);
+            const textP = document.createTextNode(valueCreatingElem);
             newElemP.appendChild(textP);
 
             // create new BUTTON element with classes and text node
@@ -30,8 +35,8 @@ window.addEventListener("load", () => {
             newElemBtn.innerHTML = "&#10005;";
             newElemBtn.setAttribute("class", "perform-task");
             newElemBtn.setAttribute("onclick", 
-                `window.localStorage.removeItem("task${i+1}"); ` +
-                `countTask--; ` + 
+                `delete obj.${key}; ` + 
+                "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
                 "this.parentElement.remove();"
             );
 
@@ -50,12 +55,19 @@ const taskText = document.getElementById("input-task-text");
 
 // handle button(+) click
 addTask.addEventListener("click", () => {
+
+    // define NULL values or NO NULL values
+    let indexCreatingElem = 1;
+    for (let key in obj) {
+        if (obj.hasOwnProperty(`task${indexCreatingElem}`)) indexCreatingElem++;
+        else break;
+    }
+
+    // take input value
     const currentText = taskText.value;
 
     //check input, empty or not
     if (currentText != "" && currentText != " ") { 
-        // task number counter
-        countTask++;
 
         // create new P element with text node
         const newElemP = document.createElement("p");
@@ -69,8 +81,8 @@ addTask.addEventListener("click", () => {
         newElemBtn.innerHTML = "&#10005;";
         newElemBtn.setAttribute("class", "perform-task");
         newElemBtn.setAttribute("onclick", 
-            `window.localStorage.removeItem("task${countTask}"); ` +
-            `countTask--; ` + 
+            `delete obj.task${indexCreatingElem}; ` + 
+            "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
             "this.parentElement.remove();"
         );
 
@@ -86,7 +98,8 @@ addTask.addEventListener("click", () => {
         taskText.value = "";
 
         // Save values in local storage
-        window.localStorage.setItem(`task${countTask}`, currentText);
+        obj[`task${indexCreatingElem}`] = currentText;
+        window.localStorage.setItem("Tasks", JSON.stringify(obj));
     }
 
     else alert("Invalid input!");
