@@ -4,6 +4,19 @@ const addTask = document.getElementById("add-task-btn");
 
 const elemUl = document.getElementById("parentLi");
 
+const arrPropAdd = [
+    {opacity: "0"},
+    {opacity: "1"}
+];
+const arrPropRem = [
+    {opacity: "1"},
+    {opacity: "0"}
+];
+const durProp = {
+    duration: 700,
+    iterations: 1
+};
+
 // check empty OBJ or not
 let obj = JSON.parse(window.localStorage.getItem("Tasks"));
 if (obj === null) {
@@ -37,7 +50,8 @@ window.addEventListener("load", () => {
             newElemBtn.setAttribute("onclick", 
                 `delete obj.${key}; ` + 
                 "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
-                "this.parentElement.remove();"
+                "this.parentElement.animate(arrPropRem, durProp); " +
+                "setTimeout(() => this.parentElement.remove(), 700);"
             );
 
             // create new LI element and append children P and BUTTON
@@ -83,7 +97,8 @@ addTask.addEventListener("click", () => {
         newElemBtn.setAttribute("onclick", 
             `delete obj.task${indexCreatingElem}; ` + 
             "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
-            "this.parentElement.remove();"
+            "this.parentElement.animate(arrPropRem, durProp); " +
+            "setTimeout(() => this.parentElement.remove(), 700);"
         );
 
         // create new LI element and append children P and BUTTON
@@ -93,6 +108,9 @@ addTask.addEventListener("click", () => {
 
         // in UL, append child LI
         elemUl.appendChild(newElemLi);
+
+        // animation adding
+        newElemLi.animate(arrPropAdd, durProp);
 
         // Clean text input after create new task
         taskText.value = "";

@@ -5,9 +5,9 @@ const imageBlock = document.querySelector("div.welcome-images");
 
 window.addEventListener("scroll", () => {
     titleBlock.style.transform = `translate(${scrollY / -5}px, ${scrollY / -5}px)`;
-    titleBlock.style.opacity = `${Math.cos(scrollY / 100)}`;
+    titleBlock.style.opacity = `${Math.cos(scrollY / 150)}`;
 
-    imageBlock.style.transform = `translate(${scrollY / 5}px, ${scrollY / -2}px)`;
-    imageBlock.style.opacity = `${Math.cos(scrollY / 100)}`;
+    imageBlock.style.transform = `translate(${scrollY / 5}px, ${scrollY / -5}px)`;
+    imageBlock.style.opacity = `${Math.cos(scrollY / 150)}`;
 
 });
