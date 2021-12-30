@@ -39,7 +39,7 @@
                 <div class="task-area">
                     <div class="header-task-area">
                         <p class="some-info">Your tasks</p>
-                        <form autocomplete="off" onkeypress="return event.key != 'Enter';">
+                        <form autocomplete="off" onsubmit="return false;">
                             <input id="input-task-text" type="text" placeholder="New..." value="">
                             <button type="button" id="add-task-btn" class="perform-task">&#10011;</button>
                         </form>

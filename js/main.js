@@ -1,19 +1,20 @@
 "use strict"
-
 const addTask = document.getElementById("add-task-btn");
 
 const elemUl = document.getElementById("parentLi");
 
+const taskText = document.getElementById("input-task-text");
+
 const arrPropAdd = [
-    {opacity: "0"},
-    {opacity: "1"}
+    {opacity: "0", left: "3rem"},
+    {opacity: "1", left: "0"}
 ];
 const arrPropRem = [
-    {opacity: "1"},
-    {opacity: "0"}
+    {opacity: "1", left: "0"},
+    {opacity: "0", left: "-5rem"}
 ];
 const durProp = {
-    duration: 700,
+    duration: 500,
     iterations: 1
 };
 
@@ -26,10 +27,15 @@ if (obj === null) {
     window.localStorage.setItem("Tasks", JSON.stringify(obj));
 }
 
+
+
 // handle window ending load
 window.addEventListener("load", () => {
 
-    // check local storage, empty or not
+    // load last text in text input
+    taskText.value = window.localStorage.getItem("InputValue");
+
+    // check task storage, empty or not
     if (Object.keys(obj).length) {
         for (let key in obj) {
 
@@ -51,7 +57,7 @@ window.addEventListener("load", () => {
                 `delete obj.${key}; ` + 
                 "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
                 "this.parentElement.animate(arrPropRem, durProp); " +
-                "setTimeout(() => this.parentElement.remove(), 700);"
+                "setTimeout(() => this.parentElement.remove(), 400);"
             );
 
             // create new LI element and append children P and BUTTON
@@ -65,10 +71,31 @@ window.addEventListener("load", () => {
     }
 });
 
-const taskText = document.getElementById("input-task-text");
+
+
+
+// handle input typing event 
+taskText.addEventListener("input", () => {
+    const currentText = taskText.value;
+    window.localStorage.setItem("InputValue", currentText);
+});
+
+
+
+// handle ENTER click for task adding
+taskText.addEventListener("keydown", event => {
+    const keyName = event.key;
+    if (keyName === "Enter") addTask.click();
+});
+
+
+
 
 // handle button(+) click
 addTask.addEventListener("click", () => {
+    
+    // clean input value storage
+    window.localStorage.removeItem("InputValue");
 
     // define NULL values or NO NULL values
     let indexCreatingElem = 1;
@@ -98,7 +125,7 @@ addTask.addEventListener("click", () => {
             `delete obj.task${indexCreatingElem}; ` + 
             "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
             "this.parentElement.animate(arrPropRem, durProp); " +
-            "setTimeout(() => this.parentElement.remove(), 700);"
+            "setTimeout(() => this.parentElement.remove(), 400);"
         );
 
         // create new LI element and append children P and BUTTON
@@ -122,3 +149,5 @@ addTask.addEventListener("click", () => {
 
     else alert("Invalid input!");
 });
+
+
