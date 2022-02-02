@@ -27,11 +27,11 @@ if (obj === null) {
     window.localStorage.setItem("Tasks", JSON.stringify(obj));
 }
 
-
-
 // handle window ending load
-window.addEventListener("load", () => {
+window.onload = loadingLocalStorage;
 
+
+function loadingLocalStorage() {
     // load last text in text input
     taskText.value = window.localStorage.getItem("InputValue");
 
@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
             const textBtn = document.createTextNode("");
             newElemBtn.appendChild(textBtn);
             newElemBtn.innerHTML = "&#10005;";
-            newElemBtn.setAttribute("class", "perform-task");
+            newElemBtn.classList.add("perform-task");
             newElemBtn.setAttribute("onclick", 
                 `delete obj.${key}; ` + 
                 "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
@@ -69,7 +69,7 @@ window.addEventListener("load", () => {
             elemUl.appendChild(newElemLi);
         }
     }
-});
+}
 
 
 
@@ -108,7 +108,7 @@ addTask.addEventListener("click", () => {
     const currentText = taskText.value;
 
     //check input, empty or not
-    if (currentText != "" && currentText != " ") { 
+    if (currentText.trim() !== "") { 
 
         // create new P element with text node
         const newElemP = document.createElement("p");
@@ -120,7 +120,7 @@ addTask.addEventListener("click", () => {
         const textBtn = document.createTextNode("");
         newElemBtn.appendChild(textBtn);
         newElemBtn.innerHTML = "&#10005;";
-        newElemBtn.setAttribute("class", "perform-task");
+        newElemBtn.classList.add("perform-task");
         newElemBtn.setAttribute("onclick", 
             `delete obj.task${indexCreatingElem}; ` + 
             "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
