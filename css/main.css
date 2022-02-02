@@ -183,7 +183,8 @@ div.task-area::before {
     background-repeat: no-repeat;
     background-size: 200% 200%;
     z-index: -1;
-    
+    opacity: 0.5;
+
     animation-name: floatGradient;
     animation-duration: 5s;
     animation-iteration-count: infinite;
