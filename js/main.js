@@ -27,6 +27,15 @@ if (obj === null) {
     window.localStorage.setItem("Tasks", JSON.stringify(obj));
 }
 
+
+function create_P_Elem(newElemP_f, textP_f, currentText_f) {
+    newElemP_f = document.createElement("p");
+    textP_f = document.createTextNode(currentText_f);
+    newElemP_f.appendChild(textP_f);
+    return newElemP_f;
+}
+
+
 // handle window ending load
 window.onload = loadingLocalStorage;
 
@@ -43,14 +52,11 @@ function loadingLocalStorage() {
             const valueCreatingElem = obj[key];
             
             // create new P element with text node
-            const newElemP = document.createElement("p");
-            const textP = document.createTextNode(valueCreatingElem);
-            newElemP.appendChild(textP);
+            let newElemP, textP;
+            newElemP = create_P_Elem(newElemP, textP, valueCreatingElem);
 
             // create new BUTTON element with classes and text node
             const newElemBtn = document.createElement("button");
-            const textBtn = document.createTextNode("");
-            newElemBtn.appendChild(textBtn);
             newElemBtn.innerHTML = "&#10005;";
             newElemBtn.classList.add("perform-task");
             newElemBtn.setAttribute("onclick", 
@@ -90,8 +96,7 @@ taskText.addEventListener("keydown", event => {
 
 
 
-
-// handle button(+) click
+// handle button (add task) click
 addTask.addEventListener("click", () => {
     
     // clean input value storage
@@ -111,14 +116,11 @@ addTask.addEventListener("click", () => {
     if (currentText.trim() !== "") { 
 
         // create new P element with text node
-        const newElemP = document.createElement("p");
-        const textP = document.createTextNode(currentText);
-        newElemP.appendChild(textP);
+        let newElemP, textP;
+        newElemP = create_P_Elem(newElemP, textP, currentText);
 
         // create new BUTTON element with classes and text node
         const newElemBtn = document.createElement("button");
-        const textBtn = document.createTextNode("");
-        newElemBtn.appendChild(textBtn);
         newElemBtn.innerHTML = "&#10005;";
         newElemBtn.classList.add("perform-task");
         newElemBtn.setAttribute("onclick", 
