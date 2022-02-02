@@ -1,5 +1,6 @@
 "use strict"
 // define some variables
+const allTasks = document.getElementsByClassName("to-do-section")[0];
 const addTask = document.getElementById("add-task-btn");
 const elemUl = document.getElementById("parentLi");
 const taskText = document.getElementById("input-task-text");
@@ -9,14 +10,19 @@ const taskText = document.getElementById("input-task-text");
 
 // define Web Animation API config
 const arrPropAdd = [
-    {opacity: "0", left: "3rem"},
-    {opacity: "1", left: "0"}
+    {opacity: 0, left: "3rem"},
+    {opacity: 1, left: 0}
 ];
 const arrPropRem = [
-    {opacity: "1", left: "0"},
-    {opacity: "0", left: "-5rem"}
+    {opacity: 1, left: 0},
+    {opacity: 0, left: "-5rem"}
+];
+const animStyle = [
+    {opacity: 0, transform: "translateX(-5rem)"},
+    {opacity: 1, transform: "translateX(0rem)"}
 ];
 const durProp = {
+    fill: "forwards",
     duration: 500,
     iterations: 1
 };
@@ -66,7 +72,7 @@ function create_Btn_Element(newElemBtn_f, obj_f, key_f) {
         delete obj[`${key_f}`];
         window.localStorage.setItem("Tasks", JSON.stringify(obj_f));
         newElemBtn_f.parentElement.animate(arrPropRem, durProp);
-        setTimeout(() => newElemBtn_f.parentElement.remove(), 400);
+        setTimeout(() => newElemBtn_f.parentElement.remove(), 500);
     });
     return newElemBtn_f;
 }
@@ -166,3 +172,21 @@ addTask.addEventListener("click", () => {
 });
 
 
+
+
+// define Intersection Observer API
+const observerConfig = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5
+}
+function observerFunc(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            allTasks.animate(animStyle, durProp);
+            observer.unobserve(allTasks);
+        }
+    });
+}
+const observer = new IntersectionObserver(observerFunc, observerConfig);
+observer.observe(allTasks);

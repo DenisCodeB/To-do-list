@@ -160,6 +160,8 @@ section.to-do-section {
     position: relative;
     padding: 10rem 0 20rem 0;
     display: block;
+    opacity: 0;
+    transform: translateX(-5rem);
 }
 div.task-area {
     padding: 1rem;
