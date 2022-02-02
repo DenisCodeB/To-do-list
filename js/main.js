@@ -1,10 +1,13 @@
 "use strict"
+// define some variables
 const addTask = document.getElementById("add-task-btn");
-
 const elemUl = document.getElementById("parentLi");
-
 const taskText = document.getElementById("input-task-text");
 
+
+
+
+// define Web Animation API config
 const arrPropAdd = [
     {opacity: "0", left: "3rem"},
     {opacity: "1", left: "0"}
@@ -18,7 +21,11 @@ const durProp = {
     iterations: 1
 };
 
-// check empty OBJ or not
+
+
+
+
+// check Local Storage OBJ
 let obj = JSON.parse(window.localStorage.getItem("Tasks"));
 if (obj === null) {
     obj = {
@@ -27,7 +34,23 @@ if (obj === null) {
     window.localStorage.setItem("Tasks", JSON.stringify(obj));
 }
 
+// handle input typing event 
+taskText.addEventListener("input", () => {
+    const currentText = taskText.value;
+    window.localStorage.setItem("InputValue", currentText);
+});
 
+// handle ENTER click for task adding
+taskText.addEventListener("keydown", event => {
+    const keyName = event.key;
+    if (keyName === "Enter") addTask.click();
+});
+
+
+
+
+
+// define some functions for creating elements
 function create_P_Elem(newElemP_f, textP_f, currentText_f) {
     newElemP_f = document.createElement("p");
     textP_f = document.createTextNode(currentText_f);
@@ -35,12 +58,33 @@ function create_P_Elem(newElemP_f, textP_f, currentText_f) {
     return newElemP_f;
 }
 
+function create_Btn_Element(newElemBtn_f, obj_f, key_f) {
+    newElemBtn_f = document.createElement("button");
+    newElemBtn_f.innerHTML = "&#10005;";
+    newElemBtn_f.classList.add("perform-task");
+    newElemBtn_f.addEventListener("click", () => {
+        delete obj[`${key_f}`];
+        window.localStorage.setItem("Tasks", JSON.stringify(obj_f));
+        newElemBtn_f.parentElement.animate(arrPropRem, durProp);
+        setTimeout(() => newElemBtn_f.parentElement.remove(), 400);
+    });
+    return newElemBtn_f;
+}
+
+function create_Li_Element(newElemLi_f, newElemP_f, newElemBtn_f) {
+    newElemLi_f = document.createElement("li");
+    newElemLi_f.appendChild(newElemP_f);
+    newElemLi_f.appendChild(newElemBtn_f);
+    return newElemLi_f;
+}
+
+
+
+
 
 // handle window ending load
-window.onload = loadingLocalStorage;
+window.onload = () => {
 
-
-function loadingLocalStorage() {
     // load last text in text input
     taskText.value = window.localStorage.getItem("InputValue");
 
@@ -55,21 +99,13 @@ function loadingLocalStorage() {
             let newElemP, textP;
             newElemP = create_P_Elem(newElemP, textP, valueCreatingElem);
 
-            // create new BUTTON element with classes and text node
-            const newElemBtn = document.createElement("button");
-            newElemBtn.innerHTML = "&#10005;";
-            newElemBtn.classList.add("perform-task");
-            newElemBtn.setAttribute("onclick", 
-                `delete obj.${key}; ` + 
-                "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
-                "this.parentElement.animate(arrPropRem, durProp); " +
-                "setTimeout(() => this.parentElement.remove(), 400);"
-            );
+            // create new BUTTON element with class and event
+            let newElemBtn;
+            newElemBtn = create_Btn_Element(newElemBtn, obj, key);
 
             // create new LI element and append children P and BUTTON
-            const newElemLi = document.createElement("li");
-            newElemLi.appendChild(newElemP);
-            newElemLi.appendChild(newElemBtn);
+            let newElemLi;
+            newElemLi = create_Li_Element(newElemLi, newElemP, newElemBtn);
 
             // in UL, append child LI
             elemUl.appendChild(newElemLi);
@@ -78,21 +114,6 @@ function loadingLocalStorage() {
 }
 
 
-
-
-// handle input typing event 
-taskText.addEventListener("input", () => {
-    const currentText = taskText.value;
-    window.localStorage.setItem("InputValue", currentText);
-});
-
-
-
-// handle ENTER click for task adding
-taskText.addEventListener("keydown", event => {
-    const keyName = event.key;
-    if (keyName === "Enter") addTask.click();
-});
 
 
 
@@ -119,21 +140,13 @@ addTask.addEventListener("click", () => {
         let newElemP, textP;
         newElemP = create_P_Elem(newElemP, textP, currentText);
 
-        // create new BUTTON element with classes and text node
-        const newElemBtn = document.createElement("button");
-        newElemBtn.innerHTML = "&#10005;";
-        newElemBtn.classList.add("perform-task");
-        newElemBtn.setAttribute("onclick", 
-            `delete obj.task${indexCreatingElem}; ` + 
-            "window.localStorage.setItem(\"Tasks\", JSON.stringify(obj)); " +
-            "this.parentElement.animate(arrPropRem, durProp); " +
-            "setTimeout(() => this.parentElement.remove(), 400);"
-        );
+        // create new BUTTON element with class and event
+        let newElemBtn;
+        newElemBtn = create_Btn_Element(newElemBtn, obj, `task${indexCreatingElem}`);
 
         // create new LI element and append children P and BUTTON
-        const newElemLi = document.createElement("li");
-        newElemLi.appendChild(newElemP);
-        newElemLi.appendChild(newElemBtn);
+        let newElemLi;
+        newElemLi = create_Li_Element(newElemLi, newElemP, newElemBtn);
 
         // in UL, append child LI
         elemUl.appendChild(newElemLi);
